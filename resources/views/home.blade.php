@@ -3,21 +3,33 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+
+        @if (isset($items))
+        @foreach ($items as $item)
+        <div class="col-md-4 mb-2">
+
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+
+                <div class="card-header bg-white">
+                    <img src="{{ asset('images/now_printing.jpg') }}" alt="" width="100%">
+                </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <a href="">{{ $item["name"] }}</a>
+                    <p>
+                        ￥{{ number_format($item["price"]) }}
+                    </p>
+                    <p class="row justify-content-center">
+                        <a href="" class="btn btn-outline-info">{{ __('Add Cart') }}</a>
+                    </p>
 
-                    {{ __('You are logged in!') }}
                 </div>
+
             </div>
         </div>
+        @endforeach
+        @endif
+
     </div>
 </div>
 @endsection

@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// 初期状態はLaravelのトップページに行く設定
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// /homeのルーティングは削除
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// トップページを変更
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group([
     'prefix' => 'admin/item',
@@ -31,5 +36,5 @@ Route::group([
     Route::post('add/', 'ItemController@add')->name('add');
     Route::get('edit/{id}', 'ItemController@edit')->name('edit');
     Route::post('update/{id}', 'ItemController@update')->name('update');
-    Route::post('destroy/{id}', 'ItemController@destroy')->name('destroy');
+    // Route::post('destroy/{id}', 'ItemController@destroy')->name('destroy');
 });

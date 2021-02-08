@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // 誰でもアクセスできるように認証処理は外す
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // ↓ 10件の商品データを取得し home.blade.phpへ渡す。
+        // SELECT * FROM items LIMIT 10;
+        $items = Item::limit(10)->get();
+        $data = ["items" => $items];
+        return view('home', $data);
+
+        // 例えば、SELECT * FROM items OFFSET 9 LIMIT 10;
+        //  Eloquent を使うと、Item::offset(9)->limit(10)->get();
     }
 }

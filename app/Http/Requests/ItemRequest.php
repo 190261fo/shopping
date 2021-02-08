@@ -57,7 +57,7 @@ class ItemRequest extends FormRequest
         return [
             "amount.integer" => Lang::get("messages.amount_invalid"),
             "price.integer" => Lang::get("messages.price_invalid"),
-            "code.unique" => Lang::get("messages.code_invalid"),
+            "code.unique" => Lang::get("messages.code_unique"),
         ];
     }
 }

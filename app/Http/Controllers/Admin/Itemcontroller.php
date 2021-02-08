@@ -11,8 +11,15 @@ class Itemcontroller extends Controller
 {
     public function index()
     {
+        //SELECT * FROM items;
+
         // return view('admin.item.index');
-        $items = Item::get();
+
+        // $items = Item::get();
+        // $data = ['items' => $items];
+        // return view('admin.item.index', $data);
+
+        $items = Item::orderBy('code')->get();
         $data = ['items' => $items];
         return view('admin.item.index', $data);
     }
@@ -24,6 +31,8 @@ class Itemcontroller extends Controller
 
     public function add(ItemRequest $request)
     {
+        //INSERT INTO items VALUES(...);
+
         // return redirect("admin/item/");
 
         // $posts = $request->all();
@@ -31,6 +40,7 @@ class Itemcontroller extends Controller
 
         // //DB追加処理
         // return redirect()->route('admin.item.index');
+
         Item::create($request->all());
         return redirect()->route('admin.item.index');
     }
@@ -39,6 +49,13 @@ class Itemcontroller extends Controller
     //     $id = $request->id;
     // }
 
+    public function edit(Request $request)
+    {
+        //SELECT * FROM items WHERE id = xx;
+        $item = Item::find($request->id);
+        $data = ['item' => $item];
+        return view('admin.item.edit', $data);
+    }
     // public function edit(Request $request)
     // {
     //     // $_GET["id"] 的なもの(ちょっと違うけど)
@@ -51,26 +68,21 @@ class Itemcontroller extends Controller
     //     $data = ['item' => $item];
     //     return view('admin.item.edit', $data);
     // }
-    public function edit(Request $request)
-    {
-        //SELECT * FROM items WHERE id = xx;
-        $item = Item::find($request->id);
-        $data = ['item' => $item];
-        return view('admin.item.edit', $data);
-    }
 
+    public function update(ItemRequest $request)
+    {
+        $posts = $request->all();
+        
+        //UPDATE items SET xxxx=xxxx, ... WHERE id = xx;
+        Item::find($request->id)->update($posts);
+        return redirect()->route('admin.item.edit', ['id' => $request->id]);
+    }
     // public function update(Request $request)
     // {
     //     // $_GET["id"] 的なもの(ちょっと違うけど)
     //     $data = ["id" => $request->id];
     //     return redirect()->route('admin.item.edit', $data);
     // }
-    public function update(ItemRequest $request)
-    {
-        $posts = $request->all();
-        Item::find($request->id)->update($posts);
-        return redirect()->route('admin.item.edit', ['id' => $request->id]);
-    }
 
     // public function destroy(Request $request)
     // {
