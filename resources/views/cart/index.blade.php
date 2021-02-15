@@ -1,10 +1,31 @@
-@extends("layouts.app")
+@extends('layouts.app')
 
-@section("content")
+@section('content')
 <div class="container">
+
+    <form action="{{ route('cart.updates') }}" method="post">
+        @csrf
+        @include('cart.components.index_nav')
+        @include('cart.components.index_item_list')
+    </form>
+
+    @include('cart.components.index_control')
+
+</div>
+  <!-- <div class="container">
     <a href="{{ route('cart.clear') }}" class="btn btn-danger">{{ __("Clear All") }}</a>
 
     <table class="table">
+
+        @if (isset($items))
+        <button class="btn btn-outline-primary">{{ __("Update") }}</button>
+        <a href="{{ route('cart.clear') }}" class="btn btn-danger">{{ __("Clear All") }}</a>
+        @else
+        <div class="alert alert-info">
+            {{ __("Cart is empty.") }}
+        </div>
+        @endif
+
         <tr>
             <th></th>
             <th>{{ __("Item Name") }}</th>
@@ -29,5 +50,17 @@
         @endforeach
     @endif
     </table>
-</div>
+
+    <div>
+        <label for="">{{ __("Total Price：") }}</label>
+        {{ $total_price }}
+    </div>
+
+    <div>
+        <p>
+            <a href="{{ route('cart.confirm') }}" class="btn btn-outline-primary">{{ __("Next") }}</a>
+        </p>
+    </div>
+
+</div> -->
 @endsection

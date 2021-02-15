@@ -26,21 +26,27 @@ Auth::routes();
 // トップページを変更
 Route::get('/', 'HomeController@index')->name('home');
 
+// Cart
 Route::group([
     'prefix' => 'cart',
     'as' => 'cart.',
-    ], function () {
+    'middleware' => 'auth',
+], function () {
     Route::get('/', 'CartController@index')->name('index');
-    Route::post('add/{id}', 'CartController@add')->name('add');
-    Route::get('remove/{id}', 'CartController@remove')->name('remove');
-    Route::post('clear', 'CartController@clear')->name('clear');
+    Route::get('/add/{id}', 'CartController@add')->name('add');
+    Route::get('/remove/{id}', 'CartController@remove')->name('remove');
+    Route::get('/clear', 'CartController@clear')->name('clear');
+    Route::get('/confirm', 'CartController@confirm')->name('confirm');
+    Route::post('/updates', 'CartController@updates')->name('updates');
+    Route::post('/order', 'CartController@order')->name('order');
 });
 
+// Admin Item
 Route::group([
     'prefix' => 'admin/item',
     'namespace' => 'Admin',
     'as' => 'admin.item.',
-    ], function () {
+], function () {
     Route::get('/', 'ItemController@index')->name('index');
     Route::get('create/', 'ItemController@create')->name('create');
     Route::post('add/', 'ItemController@add')->name('add');
