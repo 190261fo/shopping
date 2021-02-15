@@ -31,5 +31,5 @@
 
 <div>
     <label for="">{{ __('Total Price') }}:</label>
-    {{ $total_price }}
+    {{ @$total_price }}
 </div>

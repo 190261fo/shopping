@@ -95,6 +95,12 @@ class CartController extends Controller
     public function order(Request $request)
     {
         Cart::order($request);
+        return redirect()->route('cart.result');
+    }
+
+    public function result()
+    {
         return view('cart.result');
     }
+
 }

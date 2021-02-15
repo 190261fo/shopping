@@ -39,6 +39,8 @@ Route::group([
     Route::get('/confirm', 'CartController@confirm')->name('confirm');
     Route::post('/updates', 'CartController@updates')->name('updates');
     Route::post('/order', 'CartController@order')->name('order');
+    Route::get('/result', 'CartController@result')->name('result');
+
 });
 
 // Admin Item
