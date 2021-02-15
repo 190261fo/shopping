@@ -13,7 +13,7 @@
     </form>
     @endif
 
-    if (isset($items))
+    @if (isset($items))
     @include('cart.components.index_control')
     @endif
 
