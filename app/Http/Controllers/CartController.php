@@ -36,7 +36,8 @@ class CartController extends Controller
     //     }
     //     return view('cart.index', $data);
     // }
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $data = Cart::orderList($request);
         return view('cart.index', $data);
     }
@@ -79,7 +80,8 @@ class CartController extends Controller
     //     }
     //     return view('cart.confirm', $data);
     // }
-    public function confirm(Request $request) {
+    public function confirm(Request $request)
+    {
         $data = Cart::orderList($request);
         return view('cart.confirm', $data);
     }
@@ -88,5 +90,11 @@ class CartController extends Controller
     {
         UserItem::updatesCart($request, $this->user);
         return redirect()->route("cart.index");
+    }
+
+    public function order(Request $request)
+    {
+        Cart::order($request);
+        return view('cart.result');
     }
 }
